@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include:
+    - master  # Specify the branch you want to trigger builds on
+
+pool:
+  vmImage: 'windows-latest'  # or 'macOS-latest' for a Mac environment
+
+steps:
+- task: UseJavaVersion@1
+  inputs:
+    versionSpec: '1.8'
+    jdkArchitecture: 'x64'
+  
+- script: |
+    echo "Building the APK..."
+    ./gradlew assembleRelease
+  displayName: 'Build APK'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.apk'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'

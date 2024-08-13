@@ -1,10 +1,12 @@
 trigger:
   branches:
     include:
-    - master  # Specify the branch to trigger the build
+    - master  # The branch to trigger the build on
 
 pool:
-  vmImage: 'windows-latest'  # or 'macOS-latest' for a Mac environment
+  name: 'SelfHost1'  # Use the name of your agent pool
+  demands:
+    - agent.name -equals agent1  # Replace with your agent's name
 
 steps:
 - script: |

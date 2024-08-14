@@ -9,6 +9,10 @@ pool:
     - agent.name -equals selfagent11  # Replace with your agent's name
 
 steps:
+
+- script: chmod +x ./gradlew
+  displayName: 'Grant execute permission to gradlew'
+
 - script: |
     echo "Stopping Gradle daemons and cleaning project..."
     ./gradlew --stop

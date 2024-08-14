@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-    - master  # The branch to trigger the build on
+      - master  # The branch to trigger the build on
 
 pool:
   name: 'self'  # Use the name of your agent pool
@@ -9,8 +9,6 @@ pool:
     - agent.name -equals selfagent11  # Replace with your agent's name
 
 steps:
-
-
 - script: |
     echo "Setting up Java..."
     export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
@@ -19,11 +17,16 @@ steps:
 
 - script: chmod +x ./gradlew
   displayName: 'Grant execute permission to gradlew'
-  
+
 - script: |
-    echo "Building the APK..."
+    echo "Setting up SDK path in local.properties..."
+    echo "sdk.dir=/home/azureuser/Android" > $(Build.SourcesDirectory)/local.properties
+  displayName: 'Set SDK Path in local.properties'
+
+- script: |
+    echo "Building the APK with deprecation warnings..."
     ./gradlew assembleRelease --warning-mode all
-  displayName: 'Build APK'
+  displayName: 'Build APK with Warnings'
 
 - task: CopyFiles@2
   inputs:

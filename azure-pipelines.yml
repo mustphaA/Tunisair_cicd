@@ -9,6 +9,14 @@ pool:
     - agent.name -equals selfagent11  # Replace with your agent's name
 
 steps:
+
+- checkout: self
+- script: |
+    ls -l
+    chmod +x gradlew
+    ./gradlew build
+  displayName: 'Run Gradle Build'
+
 - script: |
     echo "Setting up Java..."
     export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))

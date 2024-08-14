@@ -1,3 +1,14 @@
+trigger:
+  branches:
+    include:
+      - master  # The branch to trigger the build on
+
+pool:
+  name: 'self'  # Use the name of your agent pool
+  demands:
+    - agent.name -equals selfagent11  # Replace with your agent's name
+
+steps:
 - script: |
     echo "Setting up SDK path in local.properties..."
     echo "sdk.dir=/home/azureuser/Android" > $(Build.SourcesDirectory)/local.properties

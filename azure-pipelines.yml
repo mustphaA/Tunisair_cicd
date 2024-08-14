@@ -17,6 +17,9 @@ steps:
     export PATH=$JAVA_HOME/bin:$PATH
   displayName: 'Set up Java'
 
+- script: chmod +x ./gradlew
+  displayName: 'Grant execute permission to gradlew'
+  
 - script: |
     echo "Building the APK..."
     ./gradlew assembleRelease

@@ -4,9 +4,9 @@ trigger:
     - master  # The branch to trigger the build on
 
 pool:
-  name: 'SelfHost1'  # Use the name of your agent pool
+  name: 'self'  # Use the name of your agent pool
   demands:
-    - agent.name -equals agent1  # Replace with your agent's name
+    - agent.name -equals selfagent11  # Replace with your agent's name
 
 steps:
 - script: |
@@ -24,9 +24,11 @@ steps:
   inputs:
     contents: '**/*.apk'
     targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy APK files'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  displayName: 'Publish Build Artifacts'

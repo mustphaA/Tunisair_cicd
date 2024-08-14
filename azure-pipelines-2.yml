@@ -10,7 +10,7 @@ pool:
 
 steps:
 - script: |
-    echo "Setting up SDK path in local.properties..."
-    echo "sdk.dir=/home/azureuser/Android" > $(Build.SourcesDirectory)/local.properties
-    cat $(Build.SourcesDirectory)/local.properties
-  displayName: 'Set SDK Path in local.properties and Verify'
+    echo "Stopping Gradle daemons and cleaning project..."
+    ./gradlew --stop
+    ./gradlew clean
+  displayName: 'Stop Daemons and Clean Project'

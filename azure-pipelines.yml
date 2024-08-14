@@ -22,7 +22,7 @@ steps:
   
 - script: |
     echo "Building the APK..."
-    ./gradlew assembleRelease
+    ./gradlew assembleRelease --warning-mode all
   displayName: 'Build APK'
 
 - task: CopyFiles@2

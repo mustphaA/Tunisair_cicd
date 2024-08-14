@@ -10,12 +10,6 @@ pool:
 
 steps:
 
-- checkout: self
-- script: |
-    ls -l
-    chmod +x gradlew
-    ./gradlew build
-  displayName: 'Run Gradle Build'
 
 - script: |
     echo "Setting up Java..."
